@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
 	#region QTE関連
 	/// <summary>
-	/// アラームを止めるための仮
+	/// アラームを止める
 	/// </summary>
 	public void AlarmStop()
 	{
