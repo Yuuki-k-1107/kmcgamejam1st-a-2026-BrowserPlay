@@ -19,6 +19,7 @@ public class ClockCon : MonoBehaviour
 	[SerializeField] float MaxAlarmTime;
 
 	bool alarming = false;
+	double alarmStartTime;
 	CancellationTokenSource CTSAlarmStop = new CancellationTokenSource();
 	CancellationToken CTAlarmStop;
 
@@ -42,6 +43,8 @@ public class ClockCon : MonoBehaviour
 		//アラームが鳴る
 		Debug.Log("Alarm Start");
 		Transform.position += Jump;
+		alarming = true;
+		alarmStartTime = Time.time;
 		CTAlarmStop = CTSAlarmStop.Token;
 		await Alarming(CTAlarmStop);
 	}
@@ -49,9 +52,12 @@ public class ClockCon : MonoBehaviour
 	/// <summary>
 	/// アラームを止める
 	/// </summary>
-	public void AlarmStop()
+	/// <returns>止めるまでの時間</returns>
+	public double AlarmStop()
 	{
+		alarming = false;
 		CTSAlarmStop.Cancel();
+		return Time.timeAsDouble - alarmStartTime;
 	}
 
 	/// <summary>
