@@ -1,3 +1,4 @@
+using Assets.Scenes.gameScene;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -27,14 +28,16 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public void AlarmStop()
 	{
-		ClockCon.AlarmStop();
+		ScoreManager.AlarmTime = ClockCon.AlarmStop();
 	}
 
 	public void QTEEnded(int combo)
 	{
+		ScoreManager.Combo = combo;
 		QTE_Manager.SetActive(false);
 		//リザルト表示
 		Debug.Log("リザルト表示");
+		Debug.Log(ScoreManager.Score);
 	}
 	#endregion
 }
