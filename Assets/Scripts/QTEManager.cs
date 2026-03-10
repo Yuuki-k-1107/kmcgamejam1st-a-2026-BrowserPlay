@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using R3;
 enum QTEActionType
@@ -45,7 +45,12 @@ class QTEManager: MonoBehaviour
     {
     }
 
-    void OnEnable()
+	public void Reset()
+	{
+        comboCount = 0;
+	}
+
+	void OnEnable()
     {
         upInputAction?.Enable();
         downInputAction?.Enable();

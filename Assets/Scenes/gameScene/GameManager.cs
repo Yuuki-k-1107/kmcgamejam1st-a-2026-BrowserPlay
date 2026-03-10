@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 	private void Reset()
 	{
 		ClockCon.Reset();
+		QTEManager.Reset();
 	}
 
 	#region アラーム

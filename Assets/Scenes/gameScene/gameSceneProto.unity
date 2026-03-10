@@ -729,13 +729,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195980775}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1195980776}
+        m_TargetAssemblyTypeName: BtnKariUI, Assembly-CSharp
+        m_MethodName: OnBtnStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1239,7 +1239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831a086a0d0a3342a3e0760ec5f7fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockCon
-  Transform: {fileID: 1610682574}
   MaxAlarmTime: 2
 --- !u!1 &1817895345
 GameObject:
