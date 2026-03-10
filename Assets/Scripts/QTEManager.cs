@@ -29,23 +29,22 @@ class QTEManager: MonoBehaviour
     [SerializeField] private InputAction downInputAction;
     [SerializeField] private InputAction leftInputAction;
     [SerializeField] private InputAction rightInputAction;
-    void Start()
-    {
-        setNextQTEAction();
-        // 最初の入力アクションにコールバックを設定
-        upInputAction.performed += ctx => OnQTEInput(QTEActionType.Up);
-        downInputAction.performed += ctx => OnQTEInput(QTEActionType.Down);
-        leftInputAction.performed += ctx => OnQTEInput(QTEActionType.Left);
-        rightInputAction.performed += ctx => OnQTEInput(QTEActionType.Right);
-    }
     void OnEnable()
     {
         upInputAction?.Enable();
         downInputAction?.Enable();
         leftInputAction?.Enable();
         rightInputAction?.Enable();
-    }
-    void OnDisable()
+
+		setNextQTEAction();
+		// 最初の入力アクションにコールバックを設定
+		upInputAction.performed += ctx => OnQTEInput(QTEActionType.Up);
+		downInputAction.performed += ctx => OnQTEInput(QTEActionType.Down);
+		leftInputAction.performed += ctx => OnQTEInput(QTEActionType.Left);
+		rightInputAction.performed += ctx => OnQTEInput(QTEActionType.Right);
+	}
+
+	void OnDisable()
     {
         upInputAction?.Disable();
         downInputAction?.Disable();
