@@ -32,6 +32,9 @@ class QTEManager: MonoBehaviour
     [SerializeField] private InputAction leftInputAction;
     [SerializeField] private InputAction rightInputAction;
 
+    //方向指示機(仮置き)
+    [SerializeField] DirectionArrowCon DirectionArrow;
+
 	[SerializeField] GameManager GameManager;
 
     void OnEnable()
@@ -92,6 +95,7 @@ class QTEManager: MonoBehaviour
     {
         // ランダムに次のQTEアクションを設定
         currentQTEAction = (QTEActionType)Random.Range(0, 4);
+        DirectionArrow.SetDirection(currentQTEAction);
         // コンボ数に応じて時間制限を短くする
         qteTimeLimit = defaultQTETimeLimit * Mathf.Pow(0.9f, comboCount);
         Debug.Log($"次のQTEアクション: {currentQTEAction}, 時間制限: {qteTimeLimit}");
@@ -101,9 +105,9 @@ class QTEManager: MonoBehaviour
     {
         // 最初のQTEアクションを設定
         currentQTEAction = QTEActionType.All;
-
-        // 初回は時間無制限
-        qteTimeLimit = -1;
+		DirectionArrow.SetDirection(currentQTEAction);
+		// 初回は時間無制限
+		qteTimeLimit = -1;
 		Debug.Log($"次のQTEアクション: {currentQTEAction}");
 	}
 }
