@@ -1,0 +1,29 @@
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+/// <summary>
+/// éüÇ…âüÇ∑ï˚å¸Çéwé¶Ç∑ÇÈâºUIóp
+/// </summary>
+public class DirectionArrowCon : MonoBehaviour
+{
+    [SerializeField] TextMeshProUGUI TMP;
+
+    Dictionary<QTEActionType, string> QTEActionTypeToArrowString = new();
+
+	private void Awake()
+	{
+		QTEActionTypeToArrowString.Add(QTEActionType.All, "");
+		QTEActionTypeToArrowString.Add(QTEActionType.Left, "Å©");
+		QTEActionTypeToArrowString.Add(QTEActionType.Right, "Å®");
+		QTEActionTypeToArrowString.Add(QTEActionType.Up, "Å™");
+		QTEActionTypeToArrowString.Add(QTEActionType.Down, "Å´");
+
+		TMP.text = "";
+	}
+
+	internal void SetDirection(QTEActionType actionType)
+	{
+		TMP.text=QTEActionTypeToArrowString[actionType];
+	}
+}
