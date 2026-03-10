@@ -101,7 +101,8 @@ class QTEManager: MonoBehaviour
     {
         // 最初のQTEアクションを設定
         currentQTEAction = QTEActionType.All;
-        // コンボ数に応じて時間制限を短くする
+
+        // 初回は時間無制限
         qteTimeLimit = -1;
 		Debug.Log($"次のQTEアクション: {currentQTEAction}");
 	}
