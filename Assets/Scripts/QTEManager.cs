@@ -6,7 +6,8 @@ enum QTEActionType
     Up,
     Down,
     Left,
-    Right
+    Right,
+    All
 }
 
 // ゲームの進行の流れ
@@ -40,7 +41,7 @@ class QTEManager: MonoBehaviour
         leftInputAction?.Enable();
         rightInputAction?.Enable();
 
-		setNextQTEAction();
+		SetFirstQTEAction();
 		// 最初の入力アクションにコールバックを設定
 		upInputAction.performed += ctx => OnQTEInput(QTEActionType.Up);
 		downInputAction.performed += ctx => OnQTEInput(QTEActionType.Down);
@@ -74,15 +75,20 @@ class QTEManager: MonoBehaviour
 
     private void OnQTEInput(QTEActionType inputType)
     {
-        if (qteTimeLimit > 0 && inputType == currentQTEAction)
+        //初回限定
+        if(currentQTEAction == QTEActionType.All)
+        {
+            GameManager.AlarmStop();
+		}
+        if (qteTimeLimit > 0 && inputType == currentQTEAction || currentQTEAction == QTEActionType.All)
         {
             Debug.Log($"QTE入力に成功: {inputType}");
             comboCount++;
-            setNextQTEAction();
+            SetNextQTEAction();
         }
-    }
+	}
 
-    private void setNextQTEAction()
+    private void SetNextQTEAction()
     {
         // ランダムに次のQTEアクションを設定
         currentQTEAction = (QTEActionType)Random.Range(0, 4);
@@ -90,4 +96,13 @@ class QTEManager: MonoBehaviour
         qteTimeLimit = defaultQTETimeLimit * Mathf.Pow(0.9f, comboCount);
         Debug.Log($"次のQTEアクション: {currentQTEAction}, 時間制限: {qteTimeLimit}");
     }
+
+    private void SetFirstQTEAction()
+    {
+        // 最初のQTEアクションを設定
+        currentQTEAction = QTEActionType.All;
+        // コンボ数に応じて時間制限を短くする
+        qteTimeLimit = -1;
+		Debug.Log($"次のQTEアクション: {currentQTEAction}");
+	}
 }

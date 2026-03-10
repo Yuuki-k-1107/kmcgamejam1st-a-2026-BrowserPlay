@@ -7,9 +7,15 @@ public class GameManager : MonoBehaviour
 	[SerializeField] GameObject QTE_Manager;
 	[SerializeField] QTEManager QTEManager;
 
-	#region アラーム
-	void GameStart()
+	private void Start()
 	{
+		GameStart();
+	}
+
+	#region アラーム
+	async　UniTask GameStart()
+	{
+		await ClockCon.AlarmTimerStart();
 		ClockCon.AlarmStart();
 		QTE_Manager.SetActive(true);
 	}

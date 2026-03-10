@@ -317,7 +317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &253949839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
       m_Action: Right Input
       m_Flags: 0
     m_Flags: 0
-  gameManager: {fileID: 551883505}
+  GameManager: {fileID: 551883505}
 --- !u!4 &253949840
 Transform:
   m_ObjectHideFlags: 0
