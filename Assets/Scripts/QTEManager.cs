@@ -24,11 +24,15 @@ class QTEManager: MonoBehaviour
     [SerializeField] private float defaultQTETimeLimit = 0.5f; // デフォルトのQTE時間制限（秒）
     private float qteTimeLimit = 0.5f; // QTEの時間制限（秒）
     private QTEActionType currentQTEAction;
+
     // ゲームの最初の入力を検出するためのInputAction
     [SerializeField] private InputAction upInputAction;
     [SerializeField] private InputAction downInputAction;
     [SerializeField] private InputAction leftInputAction;
     [SerializeField] private InputAction rightInputAction;
+
+	[SerializeField] GameManager GameManager;
+
     void OnEnable()
     {
         upInputAction?.Enable();
@@ -51,6 +55,7 @@ class QTEManager: MonoBehaviour
         leftInputAction?.Disable();
         rightInputAction?.Disable();
     }
+
     void Update()
     {
         if (qteTimeLimit > 0)
@@ -62,9 +67,11 @@ class QTEManager: MonoBehaviour
                 Debug.Log("時間切れ！ゲームオーバー");
                 // ゲームオーバーのロジックをここに追加
                 Debug.Log($"最終コンボ数: {comboCount}");
+                GameManager.QTEEnded(comboCount);
             }
         }
     }
+
     private void OnQTEInput(QTEActionType inputType)
     {
         if (qteTimeLimit > 0 && inputType == currentQTEAction)
@@ -74,6 +81,7 @@ class QTEManager: MonoBehaviour
             setNextQTEAction();
         }
     }
+
     private void setNextQTEAction()
     {
         // ランダムに次のQTEアクションを設定

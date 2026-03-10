@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	ClockCon ClockCon;
+	[SerializeField] ClockCon ClockCon;
+	[SerializeField] GameObject QTE_Manager;
+	[SerializeField] QTEManager QTEManager;
 
 	#region アラーム
 	void GameStart()
 	{
 		ClockCon.AlarmStart();
-		//QTEも開始
+		QTE_Manager.SetActive(true);
 	}
 	#endregion
 
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
 
 	public void QTEEnded(int combo)
 	{
+		QTE_Manager.SetActive(false);
 		//リザルト表示
 		Debug.Log("リザルト表示");
 	}

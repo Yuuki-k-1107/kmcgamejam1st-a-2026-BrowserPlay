@@ -301,6 +301,120 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &253949838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 253949840}
+  - component: {fileID: 253949839}
+  m_Layer: 0
+  m_Name: QTEManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &253949839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253949838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184c52b8c4011994082aec35f3d21098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  defaultQTETimeLimit: 5
+  upInputAction:
+    m_Name: Up Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a93aa92c-f137-4b89-8124-04724f150a73
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: ab70f4eb-a1f9-4ec9-8f46-4ec46e90ed0d
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Up Input
+      m_Flags: 0
+    m_Flags: 0
+  downInputAction:
+    m_Name: Down Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 25d82cb8-5297-47fa-96d9-0a0792cdb055
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c277b583-65db-4141-acb4-a9856bb78b17
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Down Input
+      m_Flags: 0
+    m_Flags: 0
+  leftInputAction:
+    m_Name: Left Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 39b7fdf1-148c-4808-ab1a-cc1e801f0074
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 55bddac8-e14d-487a-abdb-cdc05635ac3b
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left Input
+      m_Flags: 0
+    m_Flags: 0
+  rightInputAction:
+    m_Name: Right Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2bb1b033-9b5d-4530-99ce-76fc3e242b84
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6b537b50-5c3f-45ba-98dd-0f1dc5189813
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Right Input
+      m_Flags: 0
+    m_Flags: 0
+  gameManager: {fileID: 551883505}
+--- !u!4 &253949840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253949838}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.81481, y: -0.54002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &496609535
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b8b3ed3141a0e41843e60ae3405e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  ClockCon: {fileID: 1610682575}
+  QTE_Manager: {fileID: 253949838}
+  QTEManager: {fileID: 253949839}
 --- !u!4 &551883506
 Transform:
   m_ObjectHideFlags: 0
@@ -964,3 +1081,4 @@ SceneRoots:
   - {fileID: 556157777}
   - {fileID: 496609539}
   - {fileID: 551883506}
+  - {fileID: 253949840}
