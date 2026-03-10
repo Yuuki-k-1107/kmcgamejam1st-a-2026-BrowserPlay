@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 public class ClockCon : MonoBehaviour
 {
-	[SerializeField] Transform Transform;
+	Vector3 startPos;
     readonly Vector3 Jump = new(0, 0.5f);
 	readonly Vector3 vibration = new(0.1f, 0);
 
@@ -22,6 +22,14 @@ public class ClockCon : MonoBehaviour
 	double alarmStartTime;
 	CancellationTokenSource CTSAlarmStop = new CancellationTokenSource();
 	CancellationToken CTAlarmStop;
+
+	/// <summary>
+	/// リセット用のデータを設定
+	/// </summary>
+	private void Start()
+	{
+		startPos = base.transform.position;
+	}
 
 	/// <summary>
 	/// アラームのタイマーを動かす
@@ -42,7 +50,7 @@ public class ClockCon : MonoBehaviour
 	{
 		//アラームが鳴る
 		Debug.Log("Alarm Start");
-		Transform.position += Jump;
+		transform.position += Jump;
 		alarming = true;
 		alarmStartTime = Time.time;
 		CTAlarmStop = CTSAlarmStop.Token;
@@ -74,10 +82,10 @@ public class ClockCon : MonoBehaviour
 		{
 			while(!CTAlarmStop.IsCancellationRequested)
 			{
-				Transform.position += vibration;
+				transform.position += vibration;
 				vibe = true;
 				await UniTask.Delay(1);
-				Transform.position -= vibration;
+				transform.position -= vibration;
 				vibe = true;
 				await UniTask.Delay(1);
 			}
@@ -87,11 +95,14 @@ public class ClockCon : MonoBehaviour
 		{
 			if(vibe)
 			{
-				Transform.position -= vibration;
+				transform.position -= vibration;
 			}
 			Debug.Log("Alarm Stop");
 		}
 	}
 
-	
+	public void Reset()
+	{
+		base.transform.position = startPos;
+	}
 }

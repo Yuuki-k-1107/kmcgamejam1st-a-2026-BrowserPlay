@@ -15,9 +15,16 @@ public class GameManager : MonoBehaviour
 		
 	}
 
+	private void Reset()
+	{
+		ClockCon.Reset();
+	}
+
 	#region アラーム
 	public async UniTask GameStart()
 	{
+		Reset();
+
 		GameEndTaskSource = new UniTaskCompletionSource();
 		await ClockCon.AlarmTimerStart();
 		ClockCon.AlarmStart();
