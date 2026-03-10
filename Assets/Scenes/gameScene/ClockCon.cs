@@ -20,7 +20,7 @@ public class ClockCon : MonoBehaviour
 
 	bool alarming = false;
 	double alarmStartTime;
-	CancellationTokenSource CTSAlarmStop = new CancellationTokenSource();
+	CancellationTokenSource CTSAlarmStop;
 	CancellationToken CTAlarmStop;
 
 	/// <summary>
@@ -53,6 +53,7 @@ public class ClockCon : MonoBehaviour
 		transform.position += Jump;
 		alarming = true;
 		alarmStartTime = Time.time;
+		CTSAlarmStop = new CancellationTokenSource();
 		CTAlarmStop = CTSAlarmStop.Token;
 		await Alarming(CTAlarmStop);
 	}
@@ -65,6 +66,7 @@ public class ClockCon : MonoBehaviour
 	{
 		alarming = false;
 		CTSAlarmStop.Cancel();
+		CTSAlarmStop = null;
 		double alarmTime = Time.timeAsDouble - alarmStartTime;
 		Debug.Log($"Alarm Stop  Time : {alarmTime}");
 		return alarmTime;
