@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 using NUnit.Framework;
 
 using Random = UnityEngine.Random;
-using UnityEngine.InputSystem;
 
 public class ClockCon : MonoBehaviour
 {
