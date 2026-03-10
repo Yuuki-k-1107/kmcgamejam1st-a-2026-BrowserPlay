@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	#region アラーム
 	void GameStart()
 	{
-		UniTask.Run(ClockCon.AlarmStart);
+		ClockCon.AlarmStart();
 		//QTEも開始
 	}
 	#endregion
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 	public void QTEEnded(int combo)
 	{
 		//リザルト表示
+		Debug.Log("リザルト表示");
 	}
 	#endregion
 }
