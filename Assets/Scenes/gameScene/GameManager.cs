@@ -51,4 +51,9 @@ public class GameManager : MonoBehaviour
 		Debug.Log(_score.Value);
 	}
 	#endregion
+	public void AddScore(int score)
+	{
+		_score.Value += score;
+		Debug.Log($"スコア加算: {score}, 現在のスコア: {_score.Value}");
+	}
 }
