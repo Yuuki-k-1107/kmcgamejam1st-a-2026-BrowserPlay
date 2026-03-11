@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using R3;
-using System;
 using System.Collections.Generic;
 enum QTEInputType
 {
@@ -10,7 +9,7 @@ enum QTEInputType
     Left,
     Right,
 }
-struct QTEAction
+public struct QTEAction
 {
     public List<bool[]> inputPatterns; // 入力パターンのリスト
     public float timeLimit; // 制限時間
@@ -25,15 +24,15 @@ struct QTEAction
         for (int i = 0; i <= difficluty; i++)
         {
             // 同時に2つ押さなければならない確率: 0.75 * (1 - 0.9^difficulty)
-            if (UnityEngine.Random.value < 0.75f * (1 - Mathf.Pow(0.9f, difficluty)))
+            if (Random.value < 0.75f * (1 - Mathf.Pow(0.9f, difficluty)))
             {
                 // 同時に2つ押すパターン
                 bool[] pattern = new bool[4];
-                int first = UnityEngine.Random.Range(0, 4);
+                int first = Random.Range(0, 4);
                 int second;
                 do
                 {
-                    second = UnityEngine.Random.Range(0, 4);
+                    second = Random.Range(0, 4);
                 } while (second == first);
                 pattern[first] = true;
                 pattern[second] = true;
@@ -43,7 +42,7 @@ struct QTEAction
             {
                 // 単純に1つ押すパターン
                 bool[] pattern = new bool[4];
-                int index = UnityEngine.Random.Range(0, 4);
+                int index = Random.Range(0, 4);
                 pattern[index] = true;
                 inputPatterns.Add(pattern);
             }
@@ -107,15 +106,12 @@ class QTEManager: MonoBehaviour
     [SerializeField] private InputAction rightInputAction;
 
     // UIなどに伝達するためのイベント　R3を使用
+    [SerializeField] private QTEPrompt qTEPrompt;
     public Subject<float> onTimeLimitReset = new(); // 制限時間がリフレッシュされたとき
     public Subject<float> onTimeLimitTick = new(); // 制限時間の更新時
 
 
 	[SerializeField] GameManager GameManager;
-
-    private void Awake()
-    {
-    }
 
 	public void Reset()
 	{
@@ -161,6 +157,7 @@ class QTEManager: MonoBehaviour
             rightInputAction != null && rightInputAction.IsPressed()
         };
         int progress = currentQTEAction.CheckInput(currentInput);
+        qTEPrompt.UpdateSlotBackColor(progress);
         if (currentQTEAction.IsCompleted())
         {
             comboCount++;
@@ -176,6 +173,7 @@ class QTEManager: MonoBehaviour
         currentQTEAction = new QTEAction(countOfQTEs / 5, defaultQTETimeLimit);
         // コンボ数に応じて時間制限を短くする
         qteTimeLimit = currentQTEAction.timeLimit;
+        qTEPrompt.Setup(currentQTEAction);
         Debug.Log($"次のQTEアクション: {currentQTEAction}, 時間制限: {qteTimeLimit}");
         onTimeLimitReset.OnNext(qteTimeLimit);
         onTimeLimitTick.OnNext(qteTimeLimit);
