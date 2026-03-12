@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 using R3;
 using Unity.VisualScripting;
-
+using UnityEditor.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,6 +19,12 @@ using UnityEditor;
 [Serializable]
 public class MusicManager : MonoBehaviour
 {
+	static void NullAndFakeNullCheck<T>(T obj)
+		=> Debug.Log($"Null : {obj is null}, Fake Null : {obj == null}");
+	static void DestroyedCheck(GameObject obj)
+		=> Debug.Log($"IsDestroyed : {obj.IsDestroyed()}");
+
+
 	[SerializeField] GameObject AudioSourceProvider;
 	[SerializeField] List<MusicCon> _Musics = new();
 
@@ -54,22 +60,32 @@ public class MusicManager : MonoBehaviour
 			//削除するオブジェクトのリスト
 			List<MusicCon> deleteList = new();
 
-			if(GUILayout.Button("追加"))
+			if (GUILayout.Button("追加"))
 			{
 				Undo.RecordObject(Manager, "Add Item to List");//Ctrl+Zで戻せるように
 
-				GameObject AudioSourceProvider = Instantiate(Manager.AudioSourceProvider);
+				GameObject AudioSourceProvider = Instantiate(Manager.AudioSourceProvider);//代入忘れ
 				AudioSourceProvider.transform.parent = Manager.transform;
 				AudioSource AS = AudioSourceProvider.GetComponent<AudioSource>();
 				//Debug.Log($"null : {Con is null}, fake null : {Con == null}");
-				MusicCon Con = new(AS);
+				MusicCon Con = new(AS, AudioSourceProvider) ;
 				MusicList.Add(Con);
 				EditorUtility.SetDirty(Manager);
 			}
 
 			//削除実行
-			foreach(var Con in MusicList) if(Con.Delete) deleteList.Add(Con);
-			foreach(var Con in deleteList) MusicList.Remove(Con);
+			foreach (var Con in MusicList) if (Con.Delete) deleteList.Add(Con);
+			//Debug.Log(deleteList.Count);
+			foreach (var Con in deleteList)
+			{
+				//Con.AudioSourceProvider.transform.DetachChildren();
+				//NullAndFakeNullCheck(Con.AudioSourceProvider);
+				//DestroyedCheck(Con.AudioSourceProvider);
+				if (Con.AudioSourceProvider != null) MusicList.Remove(Con);
+				Con.Dispose();
+				//EditorSceneManager.MarkSceneDirty(Manager.gameObject.scene);
+				
+			}
 
 		}
 	}

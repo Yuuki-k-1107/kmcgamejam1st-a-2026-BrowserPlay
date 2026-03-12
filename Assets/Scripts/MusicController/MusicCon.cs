@@ -24,9 +24,10 @@ public class MusicCon : IDisposable
     [HideInInspector] public AudioSource Source;
     [SerializeField, HideInInspector] public bool Delete = false;
 
-    public MusicCon(AudioSource AS)
+    public MusicCon(AudioSource AS, GameObject AudioSourceProvider)
     {
         Source = AS;
+        this.AudioSourceProvider = AudioSourceProvider;
         Source.resource = Audio;
         Source.volume = Volume;
         Volume = 1;
@@ -54,7 +55,7 @@ public class MusicCon : IDisposable
         }
     }
 	public void Stop()
-        => Source.Stop();
+        => Source?.Stop();
 
 	static void NullAndFakeNullCheck(object obj)
         => Debug.Log($"Null : {obj is null}, Fake Null : {obj == null}");
@@ -62,8 +63,32 @@ public class MusicCon : IDisposable
     public void Dispose()
     {
         Stop();
-        if(!(AudioSourceProvider?.IsDestroyed() ?? true)) GameObject.Destroy(AudioSourceProvider);
-    }
+        //Debug.Log("Dispose");
+        if(AudioSourceProvider != null)
+		{
+			EditorApplication.delayCall += () =>
+			{
+				//Debug.Log("delay call!");
+				if (AudioSourceProvider != null)
+				{
+                    var ASP = AudioSourceProvider;
+                    AudioSourceProvider = null;
+					Selection.activeObject = null;
+                    //Debug.Log("Undo.DestroyObjectImmediate!!!!");
+					Undo.DestroyObjectImmediate(ASP);
+					EditorApplication.RepaintHierarchyWindow();
+				}
+                else
+                {
+                    //Debug.Log("AudioSourceProvider is null or fake!");
+                }
+			};
+		}
+        else
+        {
+            //Debug.Log("AudioSourceProvider is null in outer");
+        }
+	}
 
 #if UNITY_EDITOR
     /// <summary>
