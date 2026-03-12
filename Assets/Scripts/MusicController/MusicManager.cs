@@ -81,7 +81,7 @@ public class MusicManager : MonoBehaviour
 				//Con.AudioSourceProvider.transform.DetachChildren();
 				//NullAndFakeNullCheck(Con.AudioSourceProvider);
 				//DestroyedCheck(Con.AudioSourceProvider);
-				if (Con.AudioSourceProvider != null) MusicList.Remove(Con);
+				MusicList.Remove(Con);
 				Con.Dispose();
 				//EditorSceneManager.MarkSceneDirty(Manager.gameObject.scene);
 				

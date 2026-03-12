@@ -20,8 +20,8 @@ public class MusicCon : IDisposable
     [SerializeField] bool IsBGM;
     [SerializeField, Range(0, 1)] float Volume = 1;
 
-    [HideInInspector] public GameObject AudioSourceProvider;
-    [HideInInspector] public AudioSource Source;
+    [NonSerialized] GameObject AudioSourceProvider;
+    [NonSerialized] AudioSource Source;
     [SerializeField, HideInInspector] public bool Delete = false;
 
     public MusicCon(AudioSource AS, GameObject AudioSourceProvider)
