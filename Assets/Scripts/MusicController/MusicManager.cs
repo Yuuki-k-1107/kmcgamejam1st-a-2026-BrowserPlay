@@ -71,6 +71,8 @@ public class MusicManager : MonoBehaviour
 				EditorUtility.SetDirty(Manager);
 			}
 
+			EditorGUILayout.HelpBox("曲名被り禁止!", MessageType.Warning);
+
 			//削除実行
 			foreach (var Con in MusicList) if (Con.Delete) deleteList.Add(Con);
 			//Debug.Log(deleteList.Count);
