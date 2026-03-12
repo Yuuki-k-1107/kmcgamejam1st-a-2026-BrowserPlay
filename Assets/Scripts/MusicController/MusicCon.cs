@@ -66,7 +66,8 @@ public class MusicCon : IDisposable
         //Debug.Log("Dispose");
         if(AudioSourceProvider != null)
 		{
-			EditorApplication.delayCall += () =>
+#if UNITY_EDITOR
+            EditorApplication.delayCall += () =>
 			{
 				//Debug.Log("delay call!");
 				if (AudioSourceProvider != null)
@@ -83,7 +84,11 @@ public class MusicCon : IDisposable
                     //Debug.Log("AudioSourceProvider is null or fake!");
                 }
 			};
-		}
+#else
+            GameObject.Destroy(AudioSourceProvider);
+            AudioSourceProvider = null;
+#endif
+        }
         else
         {
             //Debug.Log("AudioSourceProvider is null in outer");
