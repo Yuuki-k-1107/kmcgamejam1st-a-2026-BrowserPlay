@@ -73,7 +73,7 @@ public class MusicCon : IDisposable
 				{
                     var ASP = AudioSourceProvider;
                     AudioSourceProvider = null;
-					Selection.activeObject = null;
+					//Selection.activeObject = null;
                     //Debug.Log("Undo.DestroyObjectImmediate!!!!");
 					Undo.DestroyObjectImmediate(ASP);
 					EditorApplication.RepaintHierarchyWindow();
