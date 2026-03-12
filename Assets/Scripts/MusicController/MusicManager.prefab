@@ -45,18 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   AudioSourceProvider: {fileID: 6142390819273056567, guid: 9eb030c419dc38a44a79fdaaa8daf099, type: 3}
-  _Musics:
-  - Name: 
-    Audio: {fileID: 0}
-    IsBGM: 0
-    Volume: 1
-    AudioSourceProvider: {fileID: 0}
-    AudioSource: {fileID: 0}
-    Delete: 0
-  - Name: 
-    Audio: {fileID: 0}
-    IsBGM: 0
-    Volume: 1
-    AudioSourceProvider: {fileID: 0}
-    AudioSource: {fileID: 0}
-    Delete: 0
+  _Musics: []
