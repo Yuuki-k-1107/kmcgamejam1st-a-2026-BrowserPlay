@@ -5,19 +5,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.Linq;
+using R3;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-
+/// <summary>
+/// (MusicManager).Musics[曲の名前].Playで音を鳴らせる
+/// </summary>
 [Serializable]
 public class MusicManager : MonoBehaviour
 {
-	[SerializeField] AudioSource AudioSource;
-	[SerializeField] GameObject MusicConPrefab;
-	[SerializeField] List<MusicCon> Musics;
+	[SerializeField] GameObject AudioSourceProvider;
+	[SerializeField] List<MusicCon> _Musics = new();
 
+	//これを参照
+	[DoNotSerialize] public Dictionary<string, MusicCon> Musics;
+
+	private void Awake()
+	{
+		Musics = _Musics.ToDictionary(
+			m => m.Name,
+			m => m
+			);
+	}
 
 #if UNITY_EDITOR
 	/// <summary>
@@ -31,38 +45,30 @@ public class MusicManager : MonoBehaviour
 			base.OnInspectorGUI();
 			MusicManager Manager = target as MusicManager;
 
-			// Musics
-			List<MusicCon> MusicList = Manager.Musics;
+			// _Musics
+			List<MusicCon> MusicList = Manager._Musics;
+			var serializedMusicField = serializedObject.FindProperty(nameof(Manager.Musics));
 			int i, len = MusicList.Count;
+
 
 			//削除するオブジェクトのリスト
 			List<MusicCon> deleteList = new();
-			// リスト表示
-			for(i = 0; i < len; ++i)
-			{
-				EditorGUILayout.BeginHorizontal();
-				CreateEditor(MusicList[i])?.OnInspectorGUI();
-				//if(GUILayout.Button("削除"))
-				//{
-				//	deleteList.Add(MusicList[i]);
-				//}
-				EditorGUILayout.EndHorizontal();
-			}
-
-			//削除実行
-			foreach(var Removed in deleteList) MusicList.Remove(Removed);
 
 			if(GUILayout.Button("追加"))
 			{
 				Undo.RecordObject(Manager, "Add Item to List");//Ctrl+Zで戻せるように
 
-				MusicCon Con = GameObject.Instantiate(Manager.MusicConPrefab).GetComponent<MusicCon>();
+				GameObject AudioSourceProvider = Instantiate(Manager.AudioSourceProvider);
+				AudioSource AS = AudioSourceProvider.GetComponent<AudioSource>();
 				//Debug.Log($"null : {Con is null}, fake null : {Con == null}");
-				Con.AudioSource = Manager.AudioSource;
-				Con.OnInspectorAction = c => deleteList.Add(c);
+				MusicCon Con = new(AS);
 				MusicList.Add(Con);
 				EditorUtility.SetDirty(Manager);
 			}
+
+			//削除実行
+			foreach(var Con in MusicList) if(Con.Delete) deleteList.Add(Con);
+			foreach(var Con in deleteList) MusicList.Remove(Con);
 
 		}
 	}
