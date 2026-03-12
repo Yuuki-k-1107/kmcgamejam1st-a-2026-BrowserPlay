@@ -330,7 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184c52b8c4011994082aec35f3d21098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  defaultQTETimeLimit: 5
+  resetProgressOnMiss: 1
+  defaultQTETimeLimit: 2.5
   upInputAction:
     m_Name: Up Input
     m_Type: 0
@@ -397,6 +398,23 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Right Input
+      m_Flags: 0
+    m_Flags: 0
+  shiftInputAction:
+    m_Name: Shift Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: de8c1236-7985-420f-9837-f1a44c8b5e1d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 2922f090-9f0f-4e63-827e-04be4ea81c04
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Input
       m_Flags: 0
     m_Flags: 0
   qTEPrompt: {fileID: 815844375}

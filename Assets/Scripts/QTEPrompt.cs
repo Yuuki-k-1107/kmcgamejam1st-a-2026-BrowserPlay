@@ -18,24 +18,22 @@ public class QTEPrompt: MonoBehaviour
         {
             var slot = Instantiate(slotPrefab, transform);
             _spawnedSlots.Add(slot);
-            for (int i = 0; i < 4; i++)
-            {
-                if (pattern[i])
-                {
-                    var arrow = Instantiate(arrowPrefab, slot.transform);
-                    arrow.GetComponent<Image>().sprite = arrowSprites[i];
-
-                    var rect = arrow.GetComponent<RectTransform>();
-                    rect.anchorMin = new Vector2(0.5f, 0.5f);
-                    rect.anchorMax = new Vector2(0.5f, 0.5f);
-                    rect.pivot = new Vector2(0.5f, 0.5f);
-
-                    rect.anchoredPosition = Vector2.zero;
-                }
-            }
+            var arrow = Instantiate(arrowPrefab, slot.transform);
+            arrow.GetComponent<Image>().sprite = arrowSprites[(int)pattern.Item1];
+            var rect = arrow.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = Vector2.zero;
         }
+        var needShift = new bool[qteAction.inputPatterns.Count];
+        for (int i = 0; i < qteAction.inputPatterns.Count; i++)
+        {
+            needShift[i] = qteAction.inputPatterns[i].Item2;
+        }
+        UpdateSlotBackColor(0, needShift); // スロットの背景色を更新
     }
-    public void UpdateSlotBackColor(int progress)
+    public void UpdateSlotBackColor(int progress, bool[] needShift)
     {
         for (int i = 0; i < _spawnedSlots.Count; i++)
         {
@@ -46,7 +44,7 @@ public class QTEPrompt: MonoBehaviour
             }
             else
             {
-                image.color = Color.white; // 未進行のスロットは白色
+                image.color = needShift[i] ? Color.orange : Color.white; // Shiftが必要なスロットは赤色、そうでないスロットは白色
             }
         }
     }

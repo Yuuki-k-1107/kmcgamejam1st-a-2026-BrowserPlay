@@ -33,25 +33,22 @@ public class QTETimerView : MonoBehaviour
             }).AddTo(this);
 
             // 残り時間減ったとき
-            qteManager.onTimeLimitTick.Subscribe(newTimeLeft => {
-                if (newTimeLeft < 0) // 無制限なら
+            Observable.EveryUpdate()
+                .Where(_ => qteManager.gameObject.activeSelf) // QTEManagerがアクティブなときだけ
+                .Subscribe(_ => {
+                var timeLeft = qteManager.TimeLeft;
+                if (timeLeft < 0) // 無制限なら
                 {
                     timerRingSprite.fillAmount = 0f;
                     secondText.text = "0.";
                     milliSecondText.text = "000";
                     return;
                 }
-                timerRingSprite.fillAmount = newTimeLeft/maxTime;
-                int milliSecond = (int)(1000 * newTimeLeft) % 1000;
-                secondText.text = $"{Mathf.FloorToInt(newTimeLeft)}.";
+                timerRingSprite.fillAmount = timeLeft/maxTime;
+                int milliSecond = (int)(1000 * timeLeft) % 1000;
+                secondText.text = $"{Mathf.FloorToInt(timeLeft)}.";
                 milliSecondText.text = $"{milliSecond:000}";
             }).AddTo(this);
         }
     }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
 }
