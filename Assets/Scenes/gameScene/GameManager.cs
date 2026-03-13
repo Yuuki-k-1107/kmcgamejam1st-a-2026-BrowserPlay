@@ -1,41 +1,62 @@
 ﻿using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	[Header("Settings")]
+	[SerializeField] float minWaitTime = 1f;
+	[SerializeField] float maxWaitTime = 3f;
+	[Header("References")]
+	[SerializeField] Button BtnStart;
 	[SerializeField] ClockCon ClockCon;
-	[SerializeField] GameObject QTE_Manager;
+	[SerializeField] GameObject QTEManagerObj;
 	[SerializeField] QTEManager QTEManager;
-	[SerializeField] MusicManager MusicManager;
+	[SerializeField] GameObject ScoreIndicator;
+	private readonly ReactiveProperty<int> _score = new(0);
+	public ReadOnlyReactiveProperty<int> Score => _score;
+
+	UniTaskCompletionSource GameEndTaskSource;
 
 	private void Start()
 	{
-		GameStart();
+		BtnStart.onClick.AddListener(() => GameStart().Forget());
 	}
 
 	#region アラーム
-	async UniTask GameStart()
+	public async UniTask GameStart()
 	{
-		await ClockCon.AlarmTimerStart();
-		ClockCon.AlarmStart();
-		QTE_Manager.SetActive(true);
+		QTEManager.Reset();
+		BtnStart.interactable = false;
+		ScoreIndicator.SetActive(false);
+		GameEndTaskSource = new UniTaskCompletionSource();
+		float waitTime = Random.Range(minWaitTime, maxWaitTime);
+		await UniTask.Delay((int)(waitTime * 1000));
+		ClockCon.TurnOn();
+		QTEManagerObj.SetActive(true);
+
+		await GameEndTaskSource.Task;
+		GameEndTaskSource = null;
 	}
 	#endregion
 
 	#region QTE関連
-	/// <summary>
-	/// アラームを止める
-	/// </summary>
-	public void AlarmStop()
-	{
-		ClockCon.AlarmStop();
-	}
-
 	public void QTEEnded(int combo)
 	{
-		QTE_Manager.SetActive(false);
+		QTEManagerObj.SetActive(false);
+		GameEndTaskSource.TrySetResult();
+		ClockCon.TurnOff();
+		BtnStart.interactable = true;
 		//リザルト表示
 		Debug.Log("リザルト表示");
+		Debug.Log(_score.Value);
+		ScoreIndicator.SetActive(true);
 	}
 	#endregion
+	public void AddScore(int score)
+	{
+		_score.Value += score;
+		Debug.Log($"スコア加算: {score}, 現在のスコア: {_score.Value}");
+	}
 }
