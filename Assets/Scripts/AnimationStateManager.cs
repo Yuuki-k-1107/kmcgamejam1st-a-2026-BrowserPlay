@@ -5,6 +5,7 @@ public class AnimationStateManager : MonoBehaviour
 {
 	[SerializeField] GameManager GameManager;
 	//各アニメーションオブジェクト
+	[SerializeField] GameObject SleepingBed;
 	[SerializeField] GameObject outFromBedAnimObj;
 	[SerializeField] GameObject intoBedAnimObj;
 	[SerializeField] GameObject BattlingAnimObj;
@@ -17,6 +18,7 @@ public class AnimationStateManager : MonoBehaviour
 		//アニメーションオブジェクトのアクティベーション
 		State.Subscribe(_ =>
 		{
+			if (State.CurrentValue == GameState.InBed) Debug.Log("Bed Object is ?");
 			outFromBedAnimObj.SetActive(State.CurrentValue == GameState.AlarmStoped);
 			intoBedAnimObj.SetActive(State.CurrentValue == GameState.Final);
 			BattlingAnimObj.SetActive(State.CurrentValue == GameState.Playing);
