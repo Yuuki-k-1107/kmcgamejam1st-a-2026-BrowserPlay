@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] GameObject QTEManagerObj;
 	[SerializeField] QTEManager QTEManager;
 	[SerializeField] GameObject ScoreIndicator;
+	[SerializeField] AnimationStateManager AnimationStateManager;
 	private readonly ReactiveProperty<int> _score = new(0);
 	public ReadOnlyReactiveProperty<int> Score => _score;
 	private Subject<int> onScoreAdded = new();
@@ -31,8 +32,7 @@ public class GameManager : MonoBehaviour
 
 	UniTaskCompletionSource GameEndTaskSource;
 
-	private readonly ReactiveProperty<GameState> _State;
-	public ReadOnlyReactiveProperty<GameState> State => _State;
+	public ReadOnlyReactiveProperty<GameState> State => AnimationStateManager.State;
 
 	private void Start()
 	{
