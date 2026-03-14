@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
 	#region アラーム
 	public async UniTask GameStart()
 	{
+#if DEBUG
+		await AnimationTest_biuntri();
+#endif
+
 		BtnStart.interactable = false;
 		_State.Value = GameState.InBed;
 		GameEndTaskSource = new UniTaskCompletionSource();
@@ -74,4 +78,19 @@ public class GameManager : MonoBehaviour
 		Debug.Log($"スコア加算: {score}, 現在のスコア: {_score.Value}");
 		onScoreAdded.OnNext(score);
 	}
+
+#if DEBUG
+	async UniTask AnimationTest_biuntri()
+	{
+		_State.Value = GameState.InBed;
+		await UniTask.Delay(3000);
+		_State.Value = GameState.AlarmStoped;
+		await UniTask.Delay(3000);
+		_State.Value = GameState.Playing;
+		await UniTask.Delay(3000);
+		_State.Value = GameState.Final;
+		await UniTask.Delay(3000);
+		_State.Value = GameState.InBed;
+	}
+#endif
 }
