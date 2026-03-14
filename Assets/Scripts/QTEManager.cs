@@ -40,13 +40,9 @@ public struct QTEAction
 }
 
 // ゲームの進行の流れ
-// 1. ゲーム開始前: 目覚まし時計が鳴るまでの時間をランダムに設定
-// 2. ゲーム開始後: 目覚ましが鳴り始めるまでの時間をカウントダウン
-// 3. 目覚まし時計が鳴り始めてからfirstInputActionを受け取れるようにし、QTEによるゲームが開始
-// (ここからQTEManagerがロジックの責任を持つ部分)
-// 4. 受け付けるべきQTE入力をランダムに、限度時間を回を重ねるごとに短く設定する
-// 5. プレイヤーが正しい入力をした場合、コンボカウントを増やし、次のQTEに進む
-// 6. 時間切れになった場合、ゲームオーバー
+// 1. 受け付けるべきQTE入力をランダムに、限度時間を回を重ねるごとに短く設定する
+// 2. プレイヤーが正しい入力をした場合、コンボカウントを増やし、次のQTEに進む
+// 3. 時間切れになった場合、ゲームオーバー
 
 class QTEManager: MonoBehaviour
 {
@@ -77,6 +73,8 @@ class QTEManager: MonoBehaviour
     [SerializeField] AudioSource smallSuccessES; // シーケンス一個ごとのSE
     [SerializeField] AudioSource smallFailSE; // ミスしたときのSE
     [SerializeField] AudioSource bigSuccessES; // シーケンス完成時のSE
+    // Animationへの参照
+    [SerializeField] Animator playerAnimator;
 
 	public void Reset()
 	{
