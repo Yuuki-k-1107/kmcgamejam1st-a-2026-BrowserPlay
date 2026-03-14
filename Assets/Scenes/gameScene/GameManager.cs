@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
 
 	UniTaskCompletionSource GameEndTaskSource;
 
-	public ReadOnlyReactiveProperty<GameState> State => AnimationStateManager.State;
+	private readonly ReactiveProperty<GameState> _State;
+	public ReadOnlyReactiveProperty<GameState> State => _State;
 
 	private void Start()
 	{
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
 		AnimationStateManager.Reset();
 		BtnStart.interactable = false;
 		ScoreIndicator.SetActive(false);
+		_State.Value = GameState.InBed;
 		GameEndTaskSource = new UniTaskCompletionSource();
 		float waitTime = Random.Range(minWaitTime, maxWaitTime);
 		await UniTask.Delay((int)(waitTime * 1000));

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class AnimationStateManager : MonoBehaviour
 {
+	[SerializeField] GameManager GameManager;
 	//各アニメーションオブジェクト
 	[SerializeField] GameObject outFromBedAnimObj;
 	[SerializeField] GameObject intoBedAnimObj;
 	[SerializeField] GameObject BattlingAnimObj;
 	[SerializeField] GameObject BattlingBedAnimObj;
 
-	private readonly ReactiveProperty<GameState> _State;
-	public ReadOnlyReactiveProperty<GameState> State => _State;
+	public ReadOnlyReactiveProperty<GameState> State => GameManager.State;
 
 	AnimationStateManager()
 	{
@@ -22,10 +22,5 @@ public class AnimationStateManager : MonoBehaviour
 			BattlingAnimObj.SetActive(State.CurrentValue == GameState.Playing);
 			BattlingBedAnimObj.SetActive(State.CurrentValue == GameState.Playing);
 		});
-	}
-
-	public void Reset()
-	{
-		_State.Value = GameState.InBed;
 	}
 }
