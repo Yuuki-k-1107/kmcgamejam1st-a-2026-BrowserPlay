@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] ClockCon ClockCon;
 	[SerializeField] GameObject QTEManagerObj;
 	[SerializeField] QTEManager QTEManager;
-	[SerializeField] GameObject ScoreIndicator;
 	[SerializeField] AnimationStateManager AnimationStateManager;
 	private readonly ReactiveProperty<int> _score = new(0);
 	public ReadOnlyReactiveProperty<int> Score => _score;
@@ -37,16 +36,14 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		BtnStart.onClick.AddListener(() => GameStart().Forget());
+		// BtnStart.onClick.AddListener(() => GameStart().Forget());
+		GameStart().Forget();
 	}
 
 	#region アラーム
 	public async UniTask GameStart()
 	{
-		QTEManager.Reset();
-		AnimationStateManager.Reset();
 		BtnStart.interactable = false;
-		ScoreIndicator.SetActive(false);
 		_State.Value = GameState.InBed;
 		GameEndTaskSource = new UniTaskCompletionSource();
 		float waitTime = Random.Range(minWaitTime, maxWaitTime);
@@ -69,7 +66,6 @@ public class GameManager : MonoBehaviour
 		//リザルト表示
 		Debug.Log("リザルト表示");
 		Debug.Log(_score.Value);
-		ScoreIndicator.SetActive(true);
 	}
 	#endregion
 	public void AddScore(int score)
