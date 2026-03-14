@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
 	UniTaskCompletionSource GameEndTaskSource;
 
-	private readonly ReactiveProperty<GameState> _State;
+	private readonly ReactiveProperty<GameState> _State = new();
 	public ReadOnlyReactiveProperty<GameState> State => _State;
 
 	private void Start()
