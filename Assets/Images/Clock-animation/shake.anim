@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: opening_clock_animation
+  m_Name: shake
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
