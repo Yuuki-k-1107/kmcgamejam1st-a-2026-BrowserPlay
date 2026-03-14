@@ -12,7 +12,7 @@ public class AnimationStateManager : MonoBehaviour
 
 	public ReadOnlyReactiveProperty<GameState> State => GameManager.State;
 
-	AnimationStateManager()
+	private void Awake()
 	{
 		//アニメーションオブジェクトのアクティベーション
 		State.Subscribe(_ =>
