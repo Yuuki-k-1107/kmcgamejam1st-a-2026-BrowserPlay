@@ -1,0 +1,30 @@
+Font: FOT-Rodin ProN  Style: EB
+Point Size: 20   Padding: 7   SP/PD Ratio: 35.0%
+
+Characters included: 7132/7150
+Missing characters: 18
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+ID: 8215	Hex: 2017	Char [‗]
+ID: 8219	Hex: 201B	Char [‛]
+ID: 8223	Hex: 201F	Char [‟]
+ID: 8234	Hex: 202A	Char [‪]
+ID: 8235	Hex: 202B	Char [‫]
+ID: 8236	Hex: 202C	Char [‬]
+ID: 8237	Hex: 202D	Char [‭]
+ID: 8238	Hex: 202E	Char [‮]
+ID: 8239	Hex: 202F	Char [ ]
+ID: 8244	Hex: 2034	Char [‴]
+ID: 8286	Hex: 205E	Char [⁞]
+ID: 8298	Hex: 206A	Char [⁪]
+ID: 8299	Hex: 206B	Char [⁫]
+ID: 8300	Hex: 206C	Char [⁬]
+ID: 8301	Hex: 206D	Char [⁭]
+ID: 8302	Hex: 206E	Char [⁮]
+ID: 8303	Hex: 206F	Char [⁯]
+ID: 8741	Hex: 2225	Char [∥]
+
+Characters excluded from packing:
+----------------------------------------
