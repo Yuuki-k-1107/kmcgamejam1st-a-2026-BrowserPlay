@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 2a5d6d7d6fc6d8a47b81c52f81b4adc5
+guid: abf8b6aeffa84d64f8cbafdc5b4b305d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6424538821194080789
-    second: breaking-alarm0_0
+      213: 1650295008135692037
+    second: outfrombed_0007_0
+  - first:
+      213: 3479166093212339348
+    second: outfrombed_0007_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +51,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -96,40 +99,49 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: breaking-alarm0_0
+      name: outfrombed_0007_0
       rect:
         serializedVersion: 2
-        x: 750
-        y: 308
-        width: 588
-        height: 207
+        x: 831
+        y: 85
+        width: 430
+        height: 390
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bed15051bf377d6a0800000000000000
-      internalID: -6424538821194080789
+      spriteID: 50f3786f09607e610800000000000000
+      internalID: 1650295008135692037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfrombed_0007_1
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 35
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c418cd02b784030800000000000000
+      internalID: 3479166093212339348
       vertices: []
       indices: 
       edges: []
@@ -139,7 +151,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      breaking-alarm0_0: -6424538821194080789
+      outfrombed_0007_0: 1650295008135692037
+      outfrombed_0007_1: 3479166093212339348
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
