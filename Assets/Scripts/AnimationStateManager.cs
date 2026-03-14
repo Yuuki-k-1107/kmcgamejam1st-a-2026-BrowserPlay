@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class AnimationStateManager : MonoBehaviour
 {
+	//各アニメーションオブジェクト
+	[SerializeField] GameObject outFromBedAnimObj;
+	[SerializeField] GameObject intoBedAnimObj;
+	[SerializeField] GameObject BattlingAnimObj;
+	[SerializeField] GameObject BattlingBedAnimObj;
 
 	private readonly ReactiveProperty<GameState> _State;
 	public ReadOnlyReactiveProperty<GameState> State => _State;
