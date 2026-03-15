@@ -1092,6 +1092,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3855582851635884369, guid: 28851df3c4e4e37478885471b0152ad8, type: 3}
+      propertyPath: m_fontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855582851635884369, guid: 28851df3c4e4e37478885471b0152ad8, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48
+      objectReference: {fileID: 0}
     - target: {fileID: 5374704744660726757, guid: 28851df3c4e4e37478885471b0152ad8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1171,6 +1179,14 @@ PrefabInstance:
     - target: {fileID: 5374704744660726757, guid: 28851df3c4e4e37478885471b0152ad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698147776656798414, guid: 28851df3c4e4e37478885471b0152ad8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1260
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698147776656798414, guid: 28851df3c4e4e37478885471b0152ad8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -420
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

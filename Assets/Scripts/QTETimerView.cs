@@ -37,7 +37,7 @@ public class QTETimerView : MonoBehaviour
                 .Where(_ => qteManager.gameObject.activeSelf) // QTEManagerがアクティブなときだけ
                 .Subscribe(_ => {
                 var timeLeft = qteManager.TimeLeft;
-                if (timeLeft < 0) // 無制限なら
+                if (timeLeft <= 0f) // 無制限なら
                 {
                     timerRingSprite.fillAmount = 0f;
                     secondText.text = "0.";
