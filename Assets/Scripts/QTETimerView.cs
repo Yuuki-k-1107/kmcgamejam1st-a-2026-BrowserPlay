@@ -43,6 +43,7 @@ public class QTETimerView : MonoBehaviour
                     timerRingSprite.fillAmount = 0f;
                     secondText.text = "0.";
                     milliSecondText.text = "000";
+                    return;
                 }
                 timerRingSprite.fillAmount = timeLeft/maxTime;
                 int milliSecond = (int)(1000 * timeLeft) % 1000;
