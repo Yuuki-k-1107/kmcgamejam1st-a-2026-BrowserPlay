@@ -1,4 +1,7 @@
-﻿using R3;
+﻿using Cysharp.Threading.Tasks;
+using R3;
+using R3.Triggers;
+using System.Linq;
 using UnityEngine;
 
 public class AnimationStateManager : MonoBehaviour
@@ -11,6 +14,10 @@ public class AnimationStateManager : MonoBehaviour
 	[SerializeField] GameObject BattlingAnimObj;
 	[Header("Animator")]
 	[SerializeField] Animator outFromBedAnimCon;
+
+	UniTaskCompletionSource ArareAwakeTask;
+
+
 
 	const string StopClock = nameof(StopClock);
 	const string Out = nameof(Out);
@@ -36,5 +43,23 @@ public class AnimationStateManager : MonoBehaviour
 			intoBedAnimObj.SetActive(State.CurrentValue == GameState.Final);
 			BattlingAnimObj.SetActive(State.CurrentValue == GameState.Playing);
 		}).AddTo(this);
+
+		outFromBedAnimCon
+			.GetBehaviours<ObservableStateMachineTrigger>()
+			.First()
+			.OnStateEnterAsObservable()
+			.Subscribe(_ =>
+			{
+				ArareAwakeTask.TrySetResult();
+			})
+			.AddTo(this);
+
+		ArareAwakeTaskReset();
 	}
+
+	async UniTask waitOutFromBedAnim()
+		=> await ArareAwakeTask.Task;
+
+	public void ArareAwakeTaskReset()
+		=> ArareAwakeTask = new();
 }
