@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-	InBed,
-	AlarmStoped,
-	Playing,
-	Final,
+	InBed = 0,
+	AlarmStoped = 1,
+	Playing = 2,
+	Final = 3,
 }
 
 
