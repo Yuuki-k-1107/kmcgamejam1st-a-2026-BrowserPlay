@@ -93,6 +93,11 @@ class QTEManager: MonoBehaviour
     [SerializeField] private InputAction rightInputAction;
     [SerializeField] private InputAction shiftInputAction;
 
+    [SerializeField] AudioSource cycloneAudio;
+    [SerializeField] AudioSource batAudio;
+    [SerializeField] AudioSource punchAudio;
+    [SerializeField] AudioSource kickAudio;
+
     private float[] initialTimeLimits = new float[6] {2f, 1.7f, 1.5f, 1.3f, 1.15f, 1f};
     private float[] TimeDecrease = new float[6] {0.1f, 0.085f, 0.075f, 0.065f, 0.0575f, 0.5f};
 
@@ -257,21 +262,26 @@ class QTEManager: MonoBehaviour
     {
         // とりあえず４つのアニメーションの中からランダムに再生する
         int animIndex = Random.Range(0, 4);
+        
         if (animIndex == 0)
         {
             playerAnimator.SetTrigger("Bat");
+            if (batAudio != null) batAudio.Play();
         }
         else if (animIndex == 1)
         {
             playerAnimator.SetTrigger("Cyclone");
+            if (cycloneAudio != null) cycloneAudio.Play();
         }
         else if (animIndex == 2)
         {
             playerAnimator.SetTrigger("Kick");
+            if (kickAudio != null) kickAudio.Play();
         }
         else if (animIndex == 3)
         {
             playerAnimator.SetTrigger("Punch");
+            if (punchAudio != null) punchAudio.Play();
         }
     }
     // アニメーションの完了を通知する関数（アニメーションイベントから呼び出される想定）
