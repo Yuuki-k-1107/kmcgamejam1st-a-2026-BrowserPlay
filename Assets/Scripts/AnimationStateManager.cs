@@ -58,11 +58,11 @@ public class AnimationStateManager : MonoBehaviour
 
 		intoBedAnimCon
 			.GetBehaviours<ObservableStateMachineTrigger>()
-			.First()
+			.FirstOrDefault()
 			.OnStateEnterAsObservable()
 			.Subscribe(_ =>
 			{
-				ArareSleepTaskSource.TrySetResult();
+				ArareSleepTaskSource?.TrySetResult();
 			})
 			.AddTo(this);
 
