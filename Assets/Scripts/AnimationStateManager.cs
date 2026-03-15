@@ -57,7 +57,7 @@ public class AnimationStateManager : MonoBehaviour
 		ArareAwakeTaskReset();
 	}
 
-	async UniTask waitOutFromBedAnim()
+	public async UniTask waitOutFromBedAnim()
 		=> await ArareAwakeTask.Task;
 
 	public void ArareAwakeTaskReset()

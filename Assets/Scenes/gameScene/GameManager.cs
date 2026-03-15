@@ -43,13 +43,17 @@ public class GameManager : MonoBehaviour
 	#region アラーム
 	public async UniTask GameStart()
 	{
-
+		AnimationStateManager.ArareAwakeTaskReset();
 		BtnStart.interactable = false;
 		_State.Value = GameState.InBed;
 		GameEndTaskSource = new UniTaskCompletionSource();
-		float waitTime = Random.Range(minWaitTime, maxWaitTime);
-		await UniTask.Delay((int)(waitTime * 1000));
+		//float waitTime = Random.Range(minWaitTime, maxWaitTime);
+		//await UniTask.Delay((int)(waitTime * 1000));
+		await UniTask.Delay(1000);//固定
 		ClockCon.TurnOn();
+		_State.Value = GameState.AlarmStoped;
+		await AnimationStateManager.waitOutFromBedAnim();
+		_State.Value = GameState.Playing;
 		QTEManagerObj.SetActive(true);
 
 		await GameEndTaskSource.Task;
