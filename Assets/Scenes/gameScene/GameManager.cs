@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using R3;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
 		await UniTask.Delay(1000);//固定
 		ClockCon.TurnOn();
 		_State.Value = GameState.AlarmStoped;
-		await AnimationStateManager.waitOutFromBedAnim();
+		await AnimationStateManager.OutFromBedAnimTask;
 		_State.Value = GameState.Playing;
 		QTEManagerObj.SetActive(true);
 
@@ -62,12 +63,14 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 	#region QTE関連
-	public void QTEEnded(int combo)
+	public async UniTask QTEEnded(int combo)
 	{
 		QTEManagerObj.SetActive(false);
 		GameEndTaskSource.TrySetResult();
 		ClockCon.TurnOff();
 		BtnStart.interactable = true;
+		_State.Value = GameState.Final;
+		await AnimationStateManager.IntoBedAnimTask;
 		//リザルト表示
 		Debug.Log("リザルト表示");
 		Debug.Log(_score.Value);
