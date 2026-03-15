@@ -5,11 +5,15 @@ public class AnimationStateManager : MonoBehaviour
 {
 	[SerializeField] GameManager GameManager;
 	//各アニメーションオブジェクト
-	[SerializeField] GameObject SleepingBed;
+	[Header("GameObject")]
 	[SerializeField] GameObject outFromBedAnimObj;
 	[SerializeField] GameObject intoBedAnimObj;
 	[SerializeField] GameObject BattlingAnimObj;
-	[SerializeField] GameObject BattlingBedAnimObj;
+	[Header("Animator")]
+	[SerializeField] Animator outFromBedAnimCon;
+
+	const string StopClock = nameof(StopClock);
+	const string Out = nameof(Out);
 
 	public ReadOnlyReactiveProperty<GameState> State => GameManager.State;
 
@@ -18,11 +22,19 @@ public class AnimationStateManager : MonoBehaviour
 		//アニメーションオブジェクトのアクティベーション
 		State.Subscribe(_ =>
 		{
-			if (State.CurrentValue == GameState.InBed) Debug.Log("Bed Object is ?");
-			outFromBedAnimObj.SetActive(State.CurrentValue == GameState.AlarmStoped);
+			switch (State.CurrentValue)
+			{
+				case GameState.AlarmStoped:
+					outFromBedAnimCon.SetTrigger(StopClock);
+					break;
+				case GameState.Playing:
+					outFromBedAnimCon.SetTrigger(Out);
+					break;
+				default: break;
+			}
+			outFromBedAnimObj.SetActive((int)State.CurrentValue <= 3);//プレイ中
 			intoBedAnimObj.SetActive(State.CurrentValue == GameState.Final);
 			BattlingAnimObj.SetActive(State.CurrentValue == GameState.Playing);
-			BattlingBedAnimObj.SetActive(State.CurrentValue == GameState.Playing);
 		}).AddTo(this);
 	}
 }

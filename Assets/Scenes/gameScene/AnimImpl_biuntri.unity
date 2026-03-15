@@ -686,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &661165149
 Animator:
   serializedVersion: 7
@@ -2140,6 +2140,10 @@ PrefabInstance:
       propertyPath: BattlingAnimObj
       value: 
       objectReference: {fileID: 211485090}
+    - target: {fileID: 3026906556185997965, guid: 6b5e70348de32f64da2f93e04f6f78c8, type: 3}
+      propertyPath: outFromBedAnimCon
+      value: 
+      objectReference: {fileID: 661165149}
     - target: {fileID: 3026906556185997965, guid: 6b5e70348de32f64da2f93e04f6f78c8, type: 3}
       propertyPath: outFromBedAnimObj
       value: 
